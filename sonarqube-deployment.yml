@@ -14,7 +14,7 @@ spec:
         name: sonarqube
     spec:
       containers:
-        - image: sonarqube:7.9.1-community
+        - image: sonarqube:lts-community
           name: sonarqube
           env:
             - name: SONARQUBE_JDBC_PASSWORD
@@ -31,9 +31,9 @@ spec:
               name: sonarqube
           volumeMounts:
             - mountPath: "/opt/sonarqube/data/"
-              name: sonar-data
+              name: sonar-data-disk
             - mountPath: "/opt/sonarqube/extensions/"
-              name: sonar-extensions
+              name: sonar-extensions-disk
       initContainers:
         - name: sysctl
           image: busybox
@@ -42,9 +42,9 @@ spec:
           securityContext:
             privileged: true
       volumes:
-        - name: sonar-data
+        - name: sonar-data-disk
           persistentVolumeClaim:
             claimName: sonar-data
-        - name: sonar-extensions
+        - name: sonar-extensions-disk
           persistentVolumeClaim:
             claimName: sonar-extensions

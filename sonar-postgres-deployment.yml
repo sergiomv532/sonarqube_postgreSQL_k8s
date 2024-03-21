@@ -14,7 +14,7 @@ spec:
         name: sonar-postgres
     spec:
       containers:
-        - image: postgres:12.1
+        - image: postgres:12.18-alpine3.18
           name: sonar-postgres
           env:
             - name: POSTGRES_PASSWORD
